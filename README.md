@@ -69,8 +69,8 @@ npm run dev
 ### Prisma Migrations
 
 ```bash
-npx prisma migrate dev --name init
-npx prisma generate
+pnpx prisma migrate dev --name init
+pnpx prisma generate
 ```
 
 > Server will run at: **[http://localhost:3000](http://localhost:3000)**

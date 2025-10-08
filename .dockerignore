@@ -1,0 +1,13 @@
+# Ignore common development files and directories
+node_modules/
+.git/
+.vscode/
+*.log
+tmp/
+
+# Ignore sensitive files
+.env
+.gitignore
+
+# Include a specific file even if a broader rule would exclude it
+!src/important_config.js

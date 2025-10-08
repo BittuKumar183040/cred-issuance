@@ -4,9 +4,9 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import api from "@/controller/issue.js";
-import * as middlewares from "@/middlewares";
-import { checkDatabaseConnection } from "@/utils/check-dbconn";
+import api from "./controller/issue.js";
+import * as middlewares from "./middlewares.js";
+import { checkDatabaseConnection } from "./utils/check-dbconn.js";
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get("/health", async (_req: Request, res: Response) => {
+app.get("/issuance-management/health", async (_req: Request, res: Response) => {
   const status = await checkDatabaseConnection();
   res.status(status.code).json(status);
 });
@@ -24,7 +24,7 @@ app.get("/health", async (_req: Request, res: Response) => {
   return this.toString();
 };
 
-app.use("/", api);
+app.use("/issuance-management/issue", api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);

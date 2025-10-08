@@ -1,4 +1,4 @@
-import type { IssuedDelivaryStatus } from "@/enum/issued-status";
+import type { IssuedDelivaryStatus } from "../enum/issued-status.js";
 
 type IssueResponse = {
   id: string;

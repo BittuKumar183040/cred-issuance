@@ -1,7 +1,7 @@
-import type { CreateIssuerDto } from "@/dto/create.dto";
-import { IssuedDelivaryStatus } from "@/enum/issued-status";
-import { env } from "@/env";
-import { prisma } from "@/utils/prisma";
+import type { CreateIssuerDto } from "../dto/create.dto";
+import { IssuedDelivaryStatus } from "../enum/issued-status.js";
+import { env } from "../env.js";
+import { prisma } from "../utils/prisma.js";
 
 export async function createAssignment(input: CreateIssuerDto) {
   const { id, username } = input;

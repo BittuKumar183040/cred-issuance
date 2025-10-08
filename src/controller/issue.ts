@@ -1,7 +1,6 @@
-import type { CreateIssuerDto } from "@/dto/create.dto";
-
+import type { CreateIssuerDto } from "../dto/create.dto";
 import express from "express";
-import { createAssignment, getAssignments } from "@/services/assignment.service";
+import { createAssignment, getAssignments } from "../services/assignment.service";
 
 const router = express.Router();
 

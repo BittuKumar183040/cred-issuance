@@ -1,5 +1,5 @@
-import logger from "@/utils/logger";
-import { pool } from "@/utils/pool";
+import logger from "./logger.js";
+import { pool } from "./pool.js";
 
 export async function checkDatabaseConnection(): Promise<{ status: string; code: number; details?: string }> {
   try {
