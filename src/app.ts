@@ -6,7 +6,7 @@ import helmet from "helmet";
 
 import morgan from "morgan";
 
-import api from "@/issue/index.js";
+import api from "@/controller/issue.js";
 import * as middlewares from "@/middlewares";
 import { checkDatabaseConnection } from "@/utils/check-database-connection";
 

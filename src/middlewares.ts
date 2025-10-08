@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 
-import type ErrorResponse from "./interfaces/error-response.js";
+import type ErrorResponse from "./handler/error-response.js";
 
 import { env } from "@/env.js";
 
