@@ -1,6 +1,6 @@
 export enum IssuedDelivaryStatus {
-  ACTIVE = "ACTIVE",
-  DELETED = "DELETED",
-  PENDING = "PENDING",
   SUBMITTED = "SUBMITTED",
+  PROCESSING = "PROCESSING",
+  APPROVED = "APPROVED",
+  DELETED = "DELETED",
 }

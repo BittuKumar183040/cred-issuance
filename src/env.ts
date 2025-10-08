@@ -5,6 +5,7 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
   LOG_LEVEL: z.enum(["error", "warn", "info", "http", "verbose", "debug", "silly"]).default("info"),
   DATABASE_URL: z.string().default("postgresql://postgres:password@localhost:port/database"),
+  WORKER_ID: z.string().default("worker-1"),
 });
 
 try {

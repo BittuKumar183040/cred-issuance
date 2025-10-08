@@ -9,7 +9,7 @@ datasource db {
 }
 
 model assignment {
-  id            String   @id @default(uuid())
+  id            String   @id
   username      String   @unique
   issued_by     String
   issued_at     BigInt
