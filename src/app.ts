@@ -8,7 +8,7 @@ import morgan from "morgan";
 
 import api from "@/controller/issue.js";
 import * as middlewares from "@/middlewares";
-import { checkDatabaseConnection } from "@/utils/check-database-connection";
+import { checkDatabaseConnection } from "@/utils/check-dbconn";
 
 const app = express();
 

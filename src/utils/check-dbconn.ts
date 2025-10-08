@@ -1,13 +1,5 @@
-import dotenv from "dotenv";
-import { Pool } from "pg";
-import { env } from "@/env";
 import logger from "@/utils/logger";
-
-dotenv.config();
-
-export const pool = new Pool({
-  connectionString: env.DATABASE_URL,
-});
+import { pool } from "@/utils/pool";
 
 export async function checkDatabaseConnection(): Promise<{ status: string; code: number; details?: string }> {
   try {

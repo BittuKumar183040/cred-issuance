@@ -66,6 +66,17 @@ npm run dev
 
 ---
 
+### Prisma Migrations
+
+```bash
+npx prisma migrate dev --name init
+npx prisma generate
+```
+
+> Server will run at: **[http://localhost:3000](http://localhost:3000)**
+
+---
+
 ### Docker Deployment
 
 ```bash

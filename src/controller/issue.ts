@@ -1,4 +1,4 @@
-import type IssueResponse from "@/dto/issue-dto";
+import type IssueResponse from "@/dto/issue.dto";
 
 import express from "express";
 
