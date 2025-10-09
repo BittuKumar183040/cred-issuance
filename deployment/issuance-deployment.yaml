@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: issuance-service-container
-          image: *serviceImage
+          image: <issuance-service-image>:tag
           ports:
             - containerPort: 3000
           env:
