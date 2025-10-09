@@ -45,7 +45,7 @@ src/
 ### Prerequisites
 
 - Node.js ≥ 18.x
-- Docker & Docker Compose
+- Docker or Podman
 - PostgreSQL running locally or in a container
 
 ---
@@ -55,11 +55,11 @@ src/
 ```bash
 git clone https://github.com/your-username/assign-service.git
 cd assign-service
-npm install
+pnpm install
+
 cp .env.example .env
-docker compose up -d db
-npm run migrate
-npm run dev
+
+pnpm run dev
 ```
 
 > Server will run at: **[http://localhost:3000](http://localhost:3000)**
@@ -68,9 +68,14 @@ npm run dev
 
 ### Prisma Migrations
 
+- Make Migration
 ```bash
 pnpx prisma migrate dev --name init
 pnpx prisma generate
+```
+- Apply Migration
+```
+pnpx prisma migrate dev
 ```
 
 > Server will run at: **[http://localhost:3000](http://localhost:3000)**
@@ -82,12 +87,6 @@ pnpx prisma generate
 ```bash
 docker build -t assign-service .
 docker run -p 3000:3000 --env-file .env assign-service
-```
-
-Or via Docker Compose:
-
-```bash
-docker compose up --build
 ```
 
 ## Global Exception Handling
