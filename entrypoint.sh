@@ -5,5 +5,7 @@ ORDINAL=${ORDINAL:-1}
 WORKER_ID="worker-$ORDINAL"
 echo "Assigned WORKER_ID=$WORKER_ID"
 
+export PATH=$PATH:/app/node_modules/.bin
+
 npx prisma migrate deploy
 node dist/src/index.js

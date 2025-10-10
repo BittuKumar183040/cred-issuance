@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: issuance-service-container
-          image: docker.io/bittukumar183040/19564c11b232:v1
+          image: docker.io/bittukumar183040/19564c11b232:v2
           ports:
             - containerPort: 3000
           env:
@@ -33,10 +33,3 @@ spec:
               value: info
             - name: DATABASE_URL
               value: "postgresql://postgres:<password>@<url>:<port>/<db>"
-          command: ["/bin/sh","-c"]
-          args:
-            - |
-              set -x; \
-              WORKER_ID="worker-$(echo $POD_NAME | awk -F'-' '{print $NF}')"; \
-              echo "Assigned WORKER_ID=$WORKER_ID"; \
-              npx prisma migrate deploy && node dist/src/index.js

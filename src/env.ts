@@ -6,6 +6,7 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(["error", "warn", "info", "http", "verbose", "debug", "silly"]).default("info"),
   DATABASE_URL: z.string().default("postgresql://postgres:password@localhost:port/database"),
   WORKER_ID: z.string().default("worker-1"),
+  DB_SSL: z.string().default("true"),
 });
 
 try {
