@@ -26,7 +26,6 @@ const schemas: OpenAPIV3.ComponentsObject["schemas"] = {
   AssignmentsResponse: {
     type: "object",
     properties: {
-      message: { type: "string" },
       data: {
         type: "array",
         items: { $ref: "#/components/schemas/Assignment" },
@@ -64,14 +63,7 @@ const paths: OpenAPIV3.PathsObject = {
           content: {
             "application/json": {
               schema: {
-                type: "object",
-                properties: {
-                  message: {
-                    type: "string",
-                    example: "Issuer created successfully",
-                  },
-                  data: { $ref: "#/components/schemas/Assignment" },
-                },
+                $ref: "#/components/schemas/AssignmentsResponse",
               },
             },
           },

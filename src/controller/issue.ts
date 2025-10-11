@@ -14,7 +14,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const data = await createAssignment(payload);
 
     logger.info(`Issue created successfully`, { id: data.id });
-    return res.status(201).json({ message: "Issue created successfully", data });
+    return res.status(201).json(data);
   }
   catch (err) {
     next(err);
