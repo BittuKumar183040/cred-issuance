@@ -7,9 +7,11 @@ import morgan from "morgan";
 import api from "./controller/issue.js";
 import * as middlewares from "./middlewares.js";
 import { checkDatabaseConnection } from "./utils/check-dbconn.js";
+import { setupSwagger } from "./utils/swagger/swagger.js";
 
 const app = express();
 
+setupSwagger(app);
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());

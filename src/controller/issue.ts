@@ -1,42 +1,43 @@
+import type { NextFunction, Request, Response } from "express";
 import type { CreateIssuerDto } from "../dto/create.dto";
 import express from "express";
+import { ApiError } from "../handler/api-error-handler.js";
 import { createAssignment, getAssignments } from "../services/assignment.service";
 import logger from "../utils/logger.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const payload: CreateIssuerDto = req.body;
-  const requestId = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const payload: CreateIssuerDto = req.body;
 
-  logger.info(`[${requestId}] Incoming Issuer creation request`, { payload });
+    logger.info(`Incoming Issuer creation request`, { payload });
 
-  const data = await createAssignment({
-    id: payload.id,
-    username: payload.username,
-  });
+    if (!payload?.username) {
+      logger.warn(`Missing username in request`);
+      throw new ApiError(`Missing 'username' in request`, 400, "VALIDATION_ERROR");
+    }
 
-  logger.info(`[${requestId}] Issuer created successfully`, { id: data.id });
-  res.status(201).json({
-    message: "Issuer created successfully",
-    data,
-  });
+    const data = await createAssignment(payload);
+
+    logger.info(`Issue created successfully`, { id: data.id });
+    return res.status(201).json({ message: "Issue created successfully", data });
+  }
+  catch (err) {
+    next(err);
+  }
 });
 
-router.get("/", async (req, res) => {
-  const offset = Number.parseInt(req.query.offset as string) || 0;
-  const limit = Number.parseInt(req.query.limit as string) || 10;
-  const requestId = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
-
-  logger.info(`[${requestId}] Fetching issuers`, { offset, limit });
-
-  const data = await getAssignments(offset, limit);
-
-  logger.info(`[${requestId}] Issuers fetched successfully`, { count: data.data?.length || 0 });
-  res.status(200).json({
-    message: "Assignments fetched successfully",
-    ...data,
-  });
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const offset = Number.parseInt(req.query.offset as string) || 0;
+    const limit = Number.parseInt(req.query.limit as string) || 0;
+    const { data, pagination: { total, delivered } } = await getAssignments(offset, limit);
+    res.status(delivered === total ? 200 : 206).json({ data, total, delivered, offset, limit });
+  }
+  catch (err) {
+    next(err);
+  }
 });
 
 export default router;

@@ -1,7 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 
 import type ErrorResponse from "./handler/error-response.js";
-import { env } from "./env.js";
 import logger from "./utils/logger.js";
 
 export function notFound(req: Request, res: Response, next: NextFunction) {
@@ -11,12 +10,20 @@ export function notFound(req: Request, res: Response, next: NextFunction) {
   next(error);
 }
 
-export function errorHandler(err: Error, req: Request, res: Response<ErrorResponse>, _next: NextFunction) {
-  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
-  res.status(statusCode);
-  logger.error(`❌ Unhandled error in ${req.method} : ${req.url} : ${err.message} : ${err.stack}`);
-  res.json({
-    message: err.message,
-    stack: env.NODE_ENV === "production" ? "🥹" : err.stack,
+export function errorHandler(
+  err: any,
+  req: Request,
+  res: Response<ErrorResponse>,
+  _next: NextFunction,
+) {
+  const statusCode = err.statusCode || (res.statusCode !== 200 ? res.statusCode : 500);
+
+  const code = err.code || "INTERNAL_ERROR";
+  const message = err.message || "Internal server error";
+
+  logger.error(`${code}: Error in ${req.method} ${req.url} : ${message}`);
+
+  res.status(statusCode).json({
+    message,
   });
 }
