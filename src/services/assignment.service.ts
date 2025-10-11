@@ -5,8 +5,15 @@ import { ApiError } from "../handler/api-error-handler.js";
 import logger from "../utils/logger.js";
 import { prisma } from "../utils/prisma.js";
 
-export async function createAssignment(input: CreateIssuerDto) {
-  const { id, username } = input;
+export async function createAssignment(payload: CreateIssuerDto) {
+  logger.info(`Incoming Issuer creation request`, { payload });
+
+  if (!payload?.username) {
+    logger.warn(`Missing username in request`);
+    throw new ApiError(`Missing 'username' in request`, 400, "VALIDATION_ERROR");
+  }
+
+  const { id, username } = payload;
   const now = BigInt(Date.now());
 
   try {
@@ -46,6 +53,7 @@ export async function getAssignments(offset = 0, limit = 0) {
   const data = await prisma.assignment.findMany({
     skip: offset,
     take: limit,
+    orderBy: { issued_at: "desc" },
   });
   const delivered = data.length;
   return { data, pagination: { offset, limit, total, delivered } };
@@ -60,6 +68,13 @@ export async function getAssignmentById(id: string) {
 }
 
 export async function updateAssignmentStatus(id: string, status: string) {
+  if (!status) {
+    throw new ApiError("Missing 'status' in request body", 400, "VALIDATION_ERROR");
+  }
+  if (!Object.values(IssuedDelivaryStatus).includes(status as IssuedDelivaryStatus)) {
+    throw new ApiError(`Invalid 'status' value. Allowed values: ${Object.values(IssuedDelivaryStatus).join(", ")}`, 400, "VALIDATION_ERROR");
+  }
+
   const data = await getAssignmentById(id);
   if (data) {
     return prisma.assignment.update({
