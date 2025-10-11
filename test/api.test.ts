@@ -7,7 +7,7 @@ describe("POST /issuance-management/issue", () => {
   beforeEach(() => {
     vi.spyOn(service, "createAssignment").mockImplementation(async () => ({
       id: "test_001",
-      username: "test_user",
+      username: "b2",
       issued_status: "CREATED",
       issued_by: "worker-1",
       issued_at: BigInt(1234),
@@ -21,7 +21,7 @@ describe("POST /issuance-management/issue", () => {
 
   const mockPayload = {
     id: "test_001",
-    username: "test_user",
+    username: "b2",
   };
 
   it("should return 201 and created assignment when valid payload is provided", async () => {
@@ -136,7 +136,7 @@ describe("PATCH /issuance-management/issue/:id/status", () => {
 
   const mockAssignment = {
     id: testId,
-    username: "john_doe",
+    username: "b2",
     issued_status: newStatus,
     issued_by: "worker-1",
     issued_at: BigInt(1234),

@@ -64,7 +64,7 @@ export async function getAssignmentById(id: string) {
   if (data) {
     return data;
   }
-  throw new ApiError(`Assignment not found for id:${id} `, 404, "NOT_FOUND");
+  throw new ApiError(`Assignment not found for id: ${id}`, 404, "NOT_FOUND");
 }
 
 export async function updateAssignmentStatus(id: string, status: string) {
@@ -83,7 +83,7 @@ export async function updateAssignmentStatus(id: string, status: string) {
     });
   }
   else {
-    throw new ApiError(`Assignment not found for id:${id} `, 404, "NOT_FOUND");
+    throw new ApiError(`Assignment not found for id: ${id}`, 404, "NOT_FOUND");
   }
 }
 
@@ -93,7 +93,7 @@ export async function deleteAssignment(id: string) {
   }
   catch (error: any) {
     if (error.code === "P2025") {
-      throw new ApiError(`Assignment not found for id:${id} `, 404, "NOT_FOUND");
+      throw new ApiError(`Assignment not found for id: ${id}`, 404, "NOT_FOUND");
     }
     throw error;
   }

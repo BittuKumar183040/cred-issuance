@@ -193,6 +193,34 @@ const paths: OpenAPIV3.PathsObject = {
         },
       },
     },
+    delete: {
+      tags: ["Issuance"],
+      summary: "Fetch issuers by Id",
+      parameters: [
+        {
+          in: "path",
+          name: "id",
+          schema: { type: "string" },
+          required: true,
+          description: "The ID of the assignment",
+          example: "123e4567-e89b-12d3-a456-426614174000",
+        },
+      ],
+      responses: {
+        204: {
+          description: `_ : Deleted Successfully`,
+          content: {},
+        },
+        404: {
+          description: "Assignment not found for id: _",
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/MessageResponse" },
+            },
+          },
+        },
+      },
+    },
   },
 };
 

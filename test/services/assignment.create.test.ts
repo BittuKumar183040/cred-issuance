@@ -19,11 +19,11 @@ describe("createAssignment", () => {
   it("should create an assignment successfully", async () => {
     mockCreate.mockImplementation(async args => ({ data: { ...args.data } }));
 
-    const result = await createAssignment({ id: "test-uuid", username: "john_doe" } as CreateIssuerDto);
+    const result = await createAssignment({ id: "test-uuid", username: "b2" } as CreateIssuerDto);
     expect(result).toEqual({
       data: {
         id: "test-uuid",
-        username: "john_doe",
+        username: "b2",
         issued_by: "worker-1",
         issued_status: IssuedDelivaryStatus.SUBMITTED,
         issued_at: expect.any(BigInt),
