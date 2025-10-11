@@ -160,6 +160,48 @@ const paths: OpenAPIV3.PathsObject = {
       },
     },
   },
+  "/issuance-management/issue/{id}": {
+    get: {
+      tags: ["Issuance"],
+      summary: "Fetch issuers by Id",
+      parameters: [
+        {
+          in: "path",
+          name: "id",
+          schema: { type: "string" },
+          required: true,
+          description: "The ID of the assignment",
+          example: "123e4567-e89b-12d3-a456-426614174000",
+        },
+      ],
+      responses: {
+        200: {
+          description: "All assignments delivered",
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/AssignmentsResponse" },
+            },
+          },
+        },
+        404: {
+          description: "Assignment not found",
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/MessageResponse" },
+            },
+          },
+        },
+        400: {
+          description: "Validation error",
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/MessageResponse" },
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 export const swaggerSpec: OpenAPIV3.Document = {

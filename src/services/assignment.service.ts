@@ -22,7 +22,7 @@ export async function createAssignment(input: CreateIssuerDto) {
     });
   }
   catch (error: any) {
-    if (error.code === "P2002") {
+    if (error.code === "P2002" || error.code === "P2003") {
       const fields = error.meta?.target || [];
       throw new ApiError(`The credential is already issued for ${fields.join(", ")}`, 409, "DUPLICATE_KEY");
     }
@@ -52,18 +52,34 @@ export async function getAssignments(offset = 0, limit = 0) {
 }
 
 export async function getAssignmentById(id: string) {
-  return prisma.assignment.findUnique({ where: { id } });
+  const data = await prisma.assignment.findUnique({ where: { id } });
+  if (data) {
+    return data;
+  }
+  throw new ApiError(`Assignment not found for id:${id} `, 404, "NOT_FOUND");
 }
 
 export async function updateAssignmentStatus(id: string, status: string) {
-  return prisma.assignment.update({
-    where: { id },
-    data: { issued_status: status, updated_at: BigInt(Date.now()) },
-  });
+  const data = await getAssignmentById(id);
+  if (data) {
+    return prisma.assignment.update({
+      where: { id },
+      data: { issued_status: status, updated_at: BigInt(Date.now()) },
+    });
+  }
+  else {
+    throw new ApiError(`Assignment not found for id:${id} `, 404, "NOT_FOUND");
+  }
 }
 
 export async function deleteAssignment(id: string) {
-  return prisma.assignment.delete({
-    where: { id },
-  });
+  try {
+    return await prisma.assignment.delete({ where: { id } });
+  }
+  catch (error: any) {
+    if (error.code === "P2025") {
+      throw new ApiError(`Assignment not found for id:${id} `, 404, "NOT_FOUND");
+    }
+    throw error;
+  }
 }
