@@ -18,6 +18,14 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (_req: Request, res: Response) => {
+  res.send(`
+    <h1>Welcome to Issuance Management API</h1>
+    <p>API Documentation: <a href="/issuance-management/docs">/docs</a></p>
+    <p>Health Check Endpoint: <a href="/issuance-management/health">/issuance-management/health</a></p>
+  `);
+});
+
 app.get("/issuance-management/health", async (_req: Request, res: Response) => {
   const status = await checkDatabaseConnection();
   res.status(status.code).json(status);
