@@ -65,6 +65,40 @@ export async function getAssignmentById(id: string) {
   throw new ApiError(`Assignment not found for id: ${id}`, 404, "NOT_FOUND");
 }
 
+export async function getAssignmentByIssuedStatus(issued_statuses: IssuedDelivaryStatus[]) {
+  const data = await prisma.assignment.findMany({
+    where: {
+      issued_status: { in: issued_statuses },
+    },
+  });
+  logger.info(`Looking into database for statuses [${issued_statuses.join(", ")}] and found: ${data.length}`);
+  return data;
+}
+
+export async function updateAssignmentByIssuedStatus(ids: string[], issued_status: IssuedDelivaryStatus) {
+  try {
+    if (!ids || ids.length === 0) {
+      throw new ApiError("At least one ID must be provided", 400, "VALIDATION_ERROR");
+    }
+    const result = await prisma.assignment.updateMany({
+      where: {
+        id: { in: ids },
+      },
+      data: {
+        issued_status,
+        updated_at: Math.floor(Date.now() / 1000),
+      },
+    });
+
+    logger.info(`Updated ${result.count} assignments ${ids}, ${issued_status}`);
+    return result;
+  }
+  catch (error: any) {
+    logger.error(`Failed to update assignments by issued_status ${error}`);
+    throw new ApiError(error.message || "Database update failed", 500, "INTERNAL_ERROR");
+  }
+}
+
 export async function updateAssignmentStatus(id: string, status: string) {
   if (!status) {
     throw new ApiError("Missing 'status' in request body", 400, "VALIDATION_ERROR");

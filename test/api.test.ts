@@ -132,7 +132,7 @@ describe("DELETE /issuance-management/issue/:id", () => {
 
 describe("PATCH /issuance-management/issue/:id/status", () => {
   const testId = "21";
-  const newStatus = "DELIVERED";
+  const newStatus = "PROCESSED";
 
   const mockAssignment = {
     id: testId,

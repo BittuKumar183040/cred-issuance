@@ -8,6 +8,7 @@ import api from "./controller/issue.js";
 import * as middlewares from "./middlewares.js";
 import { checkDatabaseConnection } from "./utils/check-dbconn.js";
 import { setupSwagger } from "./utils/swagger/swagger.js";
+import "./services/verfication-scheduler.js";
 
 const app = express();
 

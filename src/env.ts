@@ -7,6 +7,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string().default("postgresql://postgres:password@localhost:port/database"),
   WORKER_ID: z.string().default("worker-1"),
   DB_SSL: z.string().default("true"),
+  VERIFICATION_SERVICE_URL: z.string().default("http://localhost:3001"),
+  SCHEDULER_INTERVAL_MIN: z.coerce.number().default(1),
 });
 
 try {
