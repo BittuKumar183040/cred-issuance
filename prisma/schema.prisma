@@ -19,7 +19,7 @@ model assignment {
   id            String   @id
   username      String   @unique
   issued_by     String
-  issued_at     BigInt
-  updated_at    BigInt
+  issued_at     Int
+  updated_at    Int
   issued_status String
 }

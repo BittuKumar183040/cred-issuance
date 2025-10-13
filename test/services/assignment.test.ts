@@ -26,8 +26,8 @@ describe("createAssignment", () => {
         username: "b2",
         issued_by: "worker-1",
         issued_status: IssuedDelivaryStatus.SUBMITTED,
-        issued_at: expect.any(BigInt),
-        updated_at: expect.any(BigInt),
+        issued_at: expect.any(Number),
+        updated_at: expect.any(Number),
       },
     });
   });
@@ -58,16 +58,16 @@ describe("getAssignments", () => {
         username: "b1",
         issued_by: "worker-1",
         issued_status: IssuedDelivaryStatus.SUBMITTED,
-        issued_at: BigInt(1234),
-        updated_at: BigInt(1234),
+        issued_at: 1234,
+        updated_at: 1234,
       },
       {
         id: "test-2",
         username: "b2",
         issued_by: "worker-2",
         issued_status: IssuedDelivaryStatus.SUBMITTED,
-        issued_at: BigInt(1235),
-        updated_at: BigInt(1235),
+        issued_at: 1235,
+        updated_at: 1235,
       },
     ];
 
@@ -114,8 +114,8 @@ describe("getAssignmentById", () => {
       username: "b2",
       issued_by: "worker-1",
       issued_status: IssuedDelivaryStatus.SUBMITTED,
-      issued_at: BigInt(1234),
-      updated_at: BigInt(1234),
+      issued_at: 1234,
+      updated_at: 1234,
     };
 
     mockFindUnique.mockResolvedValue(mockAssignment);
@@ -147,8 +147,8 @@ describe("deleteAssignment", () => {
       username: "b2",
       issued_by: "worker-1",
       issued_status: IssuedDelivaryStatus.SUBMITTED,
-      issued_at: BigInt(1234),
-      updated_at: BigInt(1234),
+      issued_at: 1234,
+      updated_at: 1234,
     };
 
     mockDelete.mockResolvedValue(mockAssignment);

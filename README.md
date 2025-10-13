@@ -34,9 +34,9 @@ src/
 | `id`               | UUID (PK)     | Primary Key                      | Unique ID for each assignment |
 | `username`         | TEXT (UNIQUE) | NOT NULL                         | Assignment username |
 | `issued_by`        | TEXT          | NOT NULL                         | Assigned by worker nth |
-| `issued_at`        | BIGINT        | NOT NULL (epoch)                 | Creation timestamp |
-| `updated_at`       | BIGINT        | NOT NULL (epoch)                 | Updation timestamp |
-| `issued_status`    | STRING        | ENUM: `PENDING`, `SUBMITTED`, `COMPLETED`, `DELETED`  | Assignment state |
+| `issued_at`        | INT           | NOT NULL (epoch)                 | Creation timestamp |
+| `updated_at`       | INT           | NOT NULL (epoch)                 | Updation timestamp |
+| `issued_status`    | STRING        | ENUM: `PENDING`, `SUBMITTED`, `PROCESSED` ,`DELETED`  | Assignment state |
 
 ---
 

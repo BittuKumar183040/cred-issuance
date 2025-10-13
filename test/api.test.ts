@@ -10,8 +10,8 @@ describe("POST /issuance-management/issue", () => {
       username: "b2",
       issued_status: "CREATED",
       issued_by: "worker-1",
-      issued_at: BigInt(1234),
-      updated_at: BigInt(1234),
+      issued_at: 1234,
+      updated_at: 1234,
     }));
   });
 
@@ -34,16 +34,16 @@ describe("POST /issuance-management/issue", () => {
 
     const normalizedBody = {
       ...res.body,
-      issued_at: BigInt(res.body.issued_at),
-      updated_at: BigInt(res.body.updated_at),
+      issued_at: res.body.issued_at,
+      updated_at: res.body.updated_at,
     };
 
     expect(normalizedBody).toEqual({
       ...mockPayload,
       issued_status: "CREATED",
       issued_by: "worker-1",
-      issued_at: BigInt(1234),
-      updated_at: BigInt(1234),
+      issued_at: 1234,
+      updated_at: 1234,
     });
 
     expect(service.createAssignment).toHaveBeenCalledWith(mockPayload);
@@ -66,8 +66,8 @@ describe("GET /issuance-management/issue/:id", () => {
     username: "b2",
     issued_status: "SUBMITTED",
     issued_by: "worker-1",
-    issued_at: BigInt(1234),
-    updated_at: BigInt(1234),
+    issued_at: 1234,
+    updated_at: 1234,
   };
 
   beforeEach(() => {
@@ -87,8 +87,8 @@ describe("GET /issuance-management/issue/:id", () => {
 
     const normalizedBody = {
       ...res.body,
-      issued_at: BigInt(res.body.issued_at),
-      updated_at: BigInt(res.body.updated_at),
+      issued_at: res.body.issued_at,
+      updated_at: res.body.updated_at,
     };
 
     expect(normalizedBody).toEqual(mockAssignment);
@@ -103,8 +103,8 @@ describe("DELETE /issuance-management/issue/:id", () => {
     username: "b2",
     issued_status: "SUBMITTED",
     issued_by: "worker-1",
-    issued_at: BigInt(1234),
-    updated_at: BigInt(1234),
+    issued_at: 1234,
+    updated_at: 1234,
   };
 
   beforeEach(() => {
@@ -139,8 +139,8 @@ describe("PATCH /issuance-management/issue/:id/status", () => {
     username: "b2",
     issued_status: newStatus,
     issued_by: "worker-1",
-    issued_at: BigInt(1234),
-    updated_at: BigInt(5678),
+    issued_at: 1234,
+    updated_at: 5678,
   };
 
   beforeEach(() => {
@@ -160,8 +160,8 @@ describe("PATCH /issuance-management/issue/:id/status", () => {
 
     const normalizedBody = {
       ...res.body,
-      issued_at: BigInt(res.body.issued_at),
-      updated_at: BigInt(res.body.updated_at),
+      issued_at: res.body.issued_at,
+      updated_at: res.body.updated_at,
     };
 
     expect(normalizedBody).toEqual(mockAssignment);

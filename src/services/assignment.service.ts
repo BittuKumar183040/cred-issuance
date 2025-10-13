@@ -14,7 +14,7 @@ export async function createAssignment(payload: CreateIssuerDto) {
   }
 
   const { id, username } = payload;
-  const now = BigInt(Date.now());
+  const now = Math.floor(Date.now() / 1000);
 
   try {
     return await prisma.assignment.create({
@@ -30,10 +30,8 @@ export async function createAssignment(payload: CreateIssuerDto) {
   }
   catch (error: any) {
     if (error.code === "P2002" || error.code === "P2003") {
-      const fields = error.meta?.target || [];
-      throw new ApiError(`The credential is already issued for ${fields.join(", ")}`, 409, "DUPLICATE_KEY");
+      throw new ApiError(`The credential is already issued for username: ${username}${id ? `, id: ${id}` : ""}`, 409, "DUPLICATE_KEY");
     }
-
     throw new ApiError(error.message || "Internal server error", 500, "INTERNAL_ERROR");
   }
 }
@@ -79,7 +77,7 @@ export async function updateAssignmentStatus(id: string, status: string) {
   if (data) {
     return prisma.assignment.update({
       where: { id },
-      data: { issued_status: status, updated_at: BigInt(Date.now()) },
+      data: { issued_status: status, updated_at: Date.now() },
     });
   }
   else {

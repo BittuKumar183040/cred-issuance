@@ -22,10 +22,6 @@ app.get("/issuance-management/health", async (_req: Request, res: Response) => {
   res.status(status.code).json(status);
 });
 
-(BigInt.prototype as any).toJSON = function () {
-  return this.toString();
-};
-
 app.use("/issuance-management/issue", api);
 
 app.use(middlewares.notFound);
