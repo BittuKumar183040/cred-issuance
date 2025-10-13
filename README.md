@@ -1,4 +1,8 @@
 ## Node.js (TypeScript) API — Credential Issuance
+<img width="1919" height="1028" alt="image" src="https://github.com/user-attachments/assets/673bf487-7a5a-4632-bd82-dc13c574ed9c" />
+<img width="716" height="321" alt="image" src="https://github.com/user-attachments/assets/e8152a11-1700-46f1-ac54-775720a7f053" />
+<img width="801" height="572" alt="image" src="https://github.com/user-attachments/assets/bdf2c26e-eb1b-4eea-b866-f84cff8d20a6" />
+<img width="897" height="882" alt="image" src="https://github.com/user-attachments/assets/605ee3f9-d89f-4207-a6a7-7e3fe8d5bad7" />
 
 ## Architecture Overview
 
